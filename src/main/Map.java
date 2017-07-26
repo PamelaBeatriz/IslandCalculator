@@ -13,21 +13,21 @@ public class Map {
 	private int width;
 	private int map[][] = {};
 	private int seaLevel = 0;
-	private List<Island> islands = new ArrayList<Island>();
 	private int totalAreaIslands = 0;
 	private int totalPeremeterIslands = 0;
 	private int totalNumberIslands = 0;
 	
-	public Map(int heigh, int width, int[][] map, int seaLevel, List<Island> islands) {
+	public Map(int heigh, int width, int[][] map, int seaLevel) {
 		super();
 		this.height = heigh;
 		this.width = width;
 		this.map = map;
 		this.seaLevel = seaLevel;
-		this.islands = islands;
 	}
 	
 	//calculateArea(islands), calculatePerimeter(islands), countIslands()
+	
+	//public void
 	
 	public int getHeigh() {
 		return height;
@@ -40,12 +40,6 @@ public class Map {
 	}
 	public void setWidth(int width) {
 		this.width = width;
-	}
-	public List<Island> getIslands() {
-		return islands;
-	}
-	public void setIslands(List<Island> islands) {
-		this.islands = islands;
 	}
 	public int[][] getMap() {
 		return map;

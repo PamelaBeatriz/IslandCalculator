@@ -1,11 +1,15 @@
+
 package main;
 
 import java.util.Scanner;
 
 public class IslandCalculator {
-	private Map map;
-	private int height, width, option;
+	private static Map map;
+	private static int height;
+	private static int width;
+	private static int option;
 	private static Scanner in;
+	private static OptionMenu optionMenu;
 	
 	private enum OptionMenu{
 		INPUT_MAP(1), EXIT(2);
@@ -18,23 +22,20 @@ public class IslandCalculator {
 			return value;
 		}
 	}
-	
-	private static OptionMenu optionMenu;
-	
-	public static void main(String[] args) {
 		
+	public static void main(String[] args) {		
 		in = new Scanner(System.in);
-		
-
+		init();
+		printMapInformation();
 	}
 	
 	
-	private void init(){		
+	private static void init(){		
 		
 		System.out.println("Welcome to Island Calculator. Please choose a option bellow.");
 		System.out.println("1 - INPUT A MAP");
 		System.out.println("2 - EXIT");
-		this.option = in.nextInt();
+		option = in.nextInt();
 
 		
 		do {
@@ -44,61 +45,61 @@ public class IslandCalculator {
 			System.out.println("Welcome to Island Calculator. Please choose a option bellow.");
 			System.out.println("1 - INPUT A MAP");
 			System.out.println("2 - EXIT");
-			this.option = in.nextInt();
+			option = in.nextInt();
 			
-		} while (this.option == 0);
+		} while (option == 0);
 		
 		
-		if (this.option == optionMenu.INPUT_MAP.value){
+		if (option == optionMenu.INPUT_MAP.value){
 			System.out.flush();
 			System.out.println("Put the map dimensions");
 			System.out.println("Height:");
-			this.height = in.nextInt();
+			height = in.nextInt();
 			System.out.println("Width:");
-			this.width = in.nextInt();
+			width = in.nextInt();
 			
 			//TODO validar qndo a altura e largura forem invalidas
 			
-			this.readMap();
+			readMap();
 			
 		}
-		else if(this.option == optionMenu.EXIT.value){
+		else if(option == optionMenu.EXIT.value){
 			in.close();
 			System.exit(0);
 		}			
 		
 	}
 	
-	private void readMap(){
+	private static void readMap(){
 		
 		int mapTemp[][]= {};
 		
 		System.out.flush();
 		System.out.println("Reading map ...");
 	
-		for (int col = 0; col < this.height; col++) {
-			for (int ln = 0; ln < this.width; ln++) {
+		for (int col = 0; col < height; col++) {
+			for (int ln = 0; ln < width; ln++) {
 				mapTemp[col][ln] = in.nextInt();
 			}
 		}
 		
-		this.map.setMap(mapTemp);
+		map.setMap(mapTemp);
 		
 		System.out.flush();
 		System.out.println("----- Map inserted -----");
-		for (int col = 0; col < this.height; col++) {
-			for (int ln = 0; ln < this.width; ln++) {
+		for (int col = 0; col < height; col++) {
+			for (int ln = 0; ln < width; ln++) {
 				System.out.println(mapTemp[col][ln]);
 			}
 		}
 	}
 	
-	private void printMapInformation(){
+	private static void printMapInformation(){
 		System.out.flush();
 		System.out.println("-- Map informations ----");
-		System.out.println("- Total area island(s) at default sea level: "+ this.map.getTotalAreaIslands());
-		System.out.println("- Total peremeter island(s) at default sea level: "+ this.map.getTotalPeremeterIslands());
-		System.out.println("- Total number island(s) at sea level 1: "+ this.map.getTotalNumberIslands());
+		System.out.println("- Total area island(s) at default sea level: "+ map.getTotalAreaIslands());
+		System.out.println("- Total peremeter island(s) at default sea level: "+ map.getTotalPeremeterIslands());
+		System.out.println("- Total number island(s) at sea level 1: "+ map.getTotalNumberIslands());
 	}
 
 }
