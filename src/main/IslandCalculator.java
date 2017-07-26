@@ -29,8 +29,7 @@ public class IslandCalculator {
 	}
 	
 	
-	private void init(){
-		
+	private void init(){		
 		
 		System.out.println("Welcome to Island Calculator. Please choose a option bellow.");
 		System.out.println("1 - INPUT A MAP");
@@ -66,9 +65,7 @@ public class IslandCalculator {
 		else if(this.option == optionMenu.EXIT.value){
 			in.close();
 			System.exit(0);
-		}		
-		
-		
+		}			
 		
 	}
 	
@@ -103,9 +100,5 @@ public class IslandCalculator {
 		System.out.println("- Total peremeter island(s) at default sea level: "+ this.map.getTotalPeremeterIslands());
 		System.out.println("- Total number island(s) at sea level 1: "+ this.map.getTotalNumberIslands());
 	}
-//	private void calculateArea(){}
-//	private void calculatePeremeter(){}
-//	private void calculateNumIsland(){}
-	
 
 }

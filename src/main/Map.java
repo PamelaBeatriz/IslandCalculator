@@ -27,6 +27,8 @@ public class Map {
 		this.islands = islands;
 	}
 	
+	//calculateArea(islands), calculatePerimeter(islands), countIslands()
+	
 	public int getHeigh() {
 		return height;
 	}
@@ -57,7 +59,7 @@ public class Map {
 	public void setSeaLevel(int seaLevel) {
 		this.seaLevel = seaLevel;
 	}
-
+	
 	public int getHeight() {
 		return height;
 	}
@@ -89,8 +91,5 @@ public class Map {
 	public void setTotalNumberIslands(int totalNumberIslands) {
 		this.totalNumberIslands = totalNumberIslands;
 	}
-	
-	
-	//calculateArea(islands), calculatePerimeter(islands), countIslands()
 	
 }
