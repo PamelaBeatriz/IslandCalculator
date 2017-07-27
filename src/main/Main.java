@@ -27,7 +27,7 @@ public class Main {
 			count++;
 		});
 		Map map = new Map(height, width, mapAux, seaLevel);
-		//map.calculateArea_PerimeterIsland();
+		map.calculateArea_PerimeterIsland();
 		map.countTotalIslands();
 	}
 

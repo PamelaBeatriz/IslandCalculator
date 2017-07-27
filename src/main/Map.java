@@ -32,28 +32,30 @@ public class Map {
 					if(this.positions[ln][col] > 0){
 						this.totalAreaIslands += 1;
 					}
-					if(this.countNestLand(ln, col) < 4){
-						this.totalPeremeterIslands +=1;
-					}
+					this.totalPeremeterIslands +=this.countNestLand(ln, col);
 				}
 			}			
 		}
 		System.out.println("Output #1 (total area): "  + this.totalAreaIslands);
-		System.out.println("Output #2 (total permiter):"  + this.totalPeremeterIslands);
+		System.out.println("Output #2 (total perimeter):"  + this.totalPeremeterIslands);
 	}
 	
 	private int countNestLand(int ln, int col){
 		int count = 0;
-		
-		if(ln > 0){
-			if(this.positions[ln-1][col] > 0){ count +=1; }
+		if(this.positions[ln][col] > 0){
+			if(ln > 0){
+				if(this.positions[ln-1][col] == 0){ count +=1; }
+			}
+			if(col > 0){
+				if(this.positions[ln][col - 1] == 0){count += 1;}
+			}
+			if(col < this.width-1){
+				if(this.positions[ln][col + 1] == 0 ){ count +=1;}
+			}
+			if(ln < this.height-1){
+				if(this.positions[ln+1][col] == 0){ count +=1; }
+			}
 		}
-		if(col > 0){
-			if(this.positions[ln][col - 1] > 0){count += 1;}
-		}		
-		if(this.positions[ln][col + 1] > 0 ){ count +=1;}
-		if(this.positions[ln+1][col] > 0){ count +=1; }
-		
 		return count;
 	}
 	
