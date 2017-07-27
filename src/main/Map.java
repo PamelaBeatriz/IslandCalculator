@@ -21,6 +21,7 @@ public class Map {
 		this.height = height;
 		this.width = width;
 		this.positions = map;
+		this.seaLevel = seaLevel;
 	}
 		
 	public void calculateArea_PerimeterIsland(){		
