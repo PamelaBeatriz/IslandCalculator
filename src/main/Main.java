@@ -15,25 +15,30 @@ public class Main {
 	
 	public static void main(String[] args) throws IOException {
 		Path path = FileSystems.getDefault().getPath("map.txt");
-		Supplier<Stream<String>> supplier;
+		Stream<String> lines;
 		int [][] mapAux;
-			supplier = () -> Files.lines(path, StandardCharsets.UTF_8);
-			int width = supplier.get().findFirst().get().length();
-			int height = (int) supplier.get().count();
+			lines = Files.lines(path, StandardCharsets.UTF_8);
+			int width = lines.findFirst().get().length();
+			lines.close();
+			lines = Files.lines(path, StandardCharsets.UTF_8);
+			int height = (int) lines.count();
+			lines = Files.lines(path, StandardCharsets.UTF_8);
 			mapAux = new int[height][width];
-			supplier.get().forEach(line -> {
+			lines.forEach(line -> {
 				cells = line.split(" ");
 				for(int i = 0; i < cells.length; i++){
 					mapAux[count][i] = Integer.parseInt(cells[i]);
 				}
 				count++;
 			});
+			lines.close();
 			Map map = new Map(height, width, mapAux, seaLevel);
 			//map.countIslands();
 			for(int i = 0; i < height; i++){
 				for(int j = 0; j < width; j++){
-					System.out.println(mapAux[i][j]);
+					System.out.print(mapAux[i][j]);
 				}
+				System.out.println("");
 			}
 			System.out.println();		
 	}
