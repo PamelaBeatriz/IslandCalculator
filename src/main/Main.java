@@ -29,7 +29,7 @@ public class Main {
 				count++;
 			});
 			Map map = new Map(height, width, mapAux, seaLevel);
-			map.countIslands();
+			//map.countIslands();
 			for(int i = 0; i < height; i++){
 				for(int j = 0; j < width; j++){
 					System.out.println(mapAux[i][j]);
