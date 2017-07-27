@@ -79,26 +79,28 @@ public class Map {
 		int nextLabel = 1;
 		int totalNumLabels = 0;
 
-		int [][] mLab = new int[this.height][this.width];
+		int [][] mapLabel = new int[this.height][this.width];
 		Boolean isLandActualCell, isLandUpperCell, isLandLeftCell;
 
 		
-		// Scan from top to bottom, from left to right, 
-		// map positions and label the adjacent terrestrial cells (value> 1) that belong to the same island
-		for(int l=0; l<this.height; l++)
+		// Scan from top to bottom and from left to right, 
+		// map positions and label terrestrial cells (value> 1) that belong to the same island
+		for(int l = 0; l <this.height; l++)
 		{
-			for(int c=0; c<this.width; c++)
+			for(int c = 0; c <this.width; c++)
 			{
 
-				// Verify that the top and left cells are portion of land
+				// Verify if the actual, top and left cells are portion of land
 				isLandActualCell = this.positions[l][c] > this.seaLevel;
 				isLandUpperCell = (l > 0) ? this.positions[l-1][c] > this.seaLevel : false;
 				isLandLeftCell = (c > 0) ? this.positions[l][c-1] > this.seaLevel : false;
 				
-				int leftLabel = isLandLeftCell ? mLab[l][c-1] : 0;
-				int upLabel = isLandUpperCell ? mLab[l-1][c] : 0;
-				
-				int labelP = mLab[l][c];
+				// Catching the label of left and top cell 
+				int leftLabel = isLandLeftCell ? mapLabel[l][c-1] : 0;
+				int upLabel = isLandUpperCell ? mapLabel[l-1][c] : 0;
+			
+				int labelP = mapLabel[l][c];
+				// Verify if the actual cell is land and label it 
 				if(isLandActualCell){
 					if(upLabel == 0 && leftLabel == 0){
 						labelP = nextLabel++;
@@ -109,10 +111,10 @@ public class Map {
 						labelP = (upLabel != 0) ? upLabel : leftLabel;
 					}else if(upLabel != leftLabel){
 						labelP = upLabel;
-						mLab[l][c-1] = upLabel;
+						mapLabel[l][c-1] = upLabel;
 						totalNumLabels--;
 					}
-					mLab[l][c] = labelP;	
+					mapLabel[l][c] = labelP;	
 				}
 			}
 		}
