@@ -14,11 +14,9 @@ public class Map {
 	private int totalPeremeterIslands = 0;
 	private int totalNumberIslands = 0;
 	
-	public Map(){
-		
-	}
+	public Map(){}
+	
 	public Map(int height, int width, int[][] map, int seaLevel) {
-
 		super();
 		this.height = height;
 		this.width = width;
@@ -29,8 +27,7 @@ public class Map {
 		if (this.positions!= null && this.positions.length > 0) {
 			
 			for (int ln = 0; ln < this.height; ln++) {
-				for (int col = 0; col < this.width; col++) {
-					
+				for (int col = 0; col < this.width; col++) {	
 					if(this.positions[ln][col] > 0){
 						this.totalAreaIslands += 1;
 					}
@@ -40,6 +37,8 @@ public class Map {
 				}
 			}			
 		}
+		System.out.println("Output #1 (total area): "  + this.totalAreaIslands);
+		System.out.println("Output #2 (total permiter):"  + this.totalPeremeterIslands);
 	}
 	
 	private int countNestLand(int ln, int col){
@@ -57,12 +56,45 @@ public class Map {
 		return count;
 	}
 	
-	public int getHeigh() {
-		return height;
+	public void countTotalIslands(){
+		int nextLabel = 1;
+		int totalNumLabels = 0;
+
+		int [][] mLab = new int[this.height][this.width];
+		Boolean isLandActualCell, isLandUpperCell, isLandLeftCell;
+
+		for(int l=0; l<this.height; l++)
+		{
+			for(int c=0; c<this.width; c++)
+			{
+				isLandActualCell = this.positions[l][c] > this.seaLevel;
+				isLandUpperCell = (l > 0) ? this.positions[l-1][c] > this.seaLevel : false;
+				isLandLeftCell = (c > 0) ? this.positions[l][c-1] > this.seaLevel : false;
+				
+				int leftLabel = isLandLeftCell ? mLab[l][c-1] : 0;
+				int upLabel = isLandUpperCell ? mLab[l-1][c] : 0;
+				
+				int labelP = mLab[l][c];
+				if(isLandActualCell){
+					if(upLabel == 0 && leftLabel == 0){
+						labelP = nextLabel++;
+						totalNumLabels++;
+					}else if(upLabel == leftLabel){
+						labelP = upLabel;
+					}else if(upLabel == 0 || leftLabel == 0){
+						labelP = (upLabel != 0) ? upLabel : leftLabel;
+					}else if(upLabel != leftLabel){
+						labelP = upLabel;
+						mLab[l][c-1] = upLabel;
+						totalNumLabels--;
+					}
+					mLab[l][c] = labelP;	
+				}
+			}
+		}
+		System.out.println("Output #3 (number of islands): "+ totalNumLabels);
 	}
-	public void setHeigh(int heigh) {
-		this.height = heigh;
-	}
+	
 	public int getWidth() {
 		return width;
 	}
@@ -113,49 +145,4 @@ public class Map {
 	public void setTotalNumberIslands(int totalNumberIslands) {
 		this.totalNumberIslands = totalNumberIslands;
 	}
-	
-	
-//	int nextLabel = 1;
-//	// Já irei armazenar o número de rótulos
-//	// atribuídos, para sabermos quantas figuras
-//	// encontramos na imagem.
-//	int totalNumLabels = 0;
-//	// Abaixo temos o algoritmo para preenchimento
-//	// da matriz mRot.
-//
-//	int [][] mLab = new int[height][width];
-//	int [][] map = new int[height][width];
-//
-//	for(int l=0; l<height; l++)
-//	{
-//		for(int c=0; c<width; c++)
-//		{
-//			Boolean landCellP, landCellUnder, landCellLeft;
-//			isLandActualCell = map[l][c] > 1;
-//			isLandUpperCell = (l > 0) ? map[l][c-1] > 1 : false;
-//			isLandLeftCell = (c > 0) ? map[l-1][c] > 1 : false;
-//			
-//			int leftLabel = isLandCellLeft ? mLab[l][c-1] : 0;
-//			int upLabel = isLandUpperCell ? mLab[l-1][c] : 0;
-//			
-//			int labelP;
-//			int actualPos = map[l][c];
-//			if(actualPos > 1){
-//				if(upLabel == 0 && leftLabel == 0){
-//					labelP = nextLabel++;
-//					totalNumLabels++;
-//				}else if(upLabel == leftLabel){
-//					labelP = upLabel;
-//				}else if(upLabel == 0 || leftLabel == 0){
-//					labelP = (upLabel != 0) ? upLabel : leftLabel;
-//				}else if(upLabel != leftLabel){
-//				// Atribua a P o rótulo de C
-//					labelP = upLabel;
-//					mLab[l][c-1] = upLabel;
-//					totalNumLabels--;
-//				}
-//				mLab[l][c] = labelP;	
-//			}
-//		}
-//	}
 }
