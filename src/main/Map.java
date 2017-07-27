@@ -1,8 +1,5 @@
 package main;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Represents a map
  * @author pamela.beatrizls
@@ -17,12 +14,23 @@ public class Map {
 	private int totalPeremeterIslands = 0;
 	private int totalNumberIslands = 0;
 	
-	public Map(int heigh, int width, int[][] map, int seaLevel) {
+	public Map(){
+		
+	}
+	
+	public Map(int height, int width, int[][] map, int seaLevel) {
 		super();
-		this.height = heigh;
+		this.height = height;
 		this.width = width;
 		this.map = map;
 		this.seaLevel = seaLevel;
+	}
+	
+	public int countIslands(){
+		/*for(int y = 0; y < map.length; y++){
+			for(int x = 0; x < map.)
+		}*/
+		return 0;
 	}
 	
 	//calculateArea(islands), calculatePerimeter(islands), countIslands()
