@@ -43,6 +43,10 @@ public class Map {
 	private int countNestLand(int ln, int col){
 		int count = 0;
 		if(this.positions[ln][col] > 0){
+			//Verfica se a porção de terra se encontra em alguma borda da matriz e contabiliza como perímetro
+			if(ln == 0 || col ==0 || ln == this.height-1 || col == this.width-1){
+				count += 1;
+			}
 			if(ln > 0){
 				if(this.positions[ln-1][col] == 0){ count +=1; }
 			}
